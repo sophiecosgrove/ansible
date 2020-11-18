@@ -1,0 +1,27 @@
+- hosts: instance-2
+  become: yes
+  vars:
+    webserver: nginx
+    webserver_root_dir: /var/www/html
+  tasks: 
+  - name: debug
+    debug:
+      msg: "the value of webserver is {{ webserver }}"
+  - name: install webserver
+    package: 
+      name: "{{ webserver }}"
+      state: present
+  - name: start webserver
+    service:
+      name: "{{ webserver }}"
+      state: started
+  - name: check webserver root directory exists
+    file: 
+      path: "{{ webserver_root_dir }}"
+      state: directory
+  - name: deploy static website
+    uri:
+      url: https://raw.githubusercontent.com/abdennour/example-static-website/master/index.html
+      # root directory of nginx
+      dest: "{{ webserver_root_dir }}" # or /usr/share/nginx/html
+

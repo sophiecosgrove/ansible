@@ -1,0 +1,20 @@
+- name: file management
+  hosts: instance-2
+  tasks:
+  - name: copy hello file
+    copy:
+      content: "Hello"
+      dest: /tmp/hello.txt
+  - name: copy hi file
+    copy:
+      content: "Hi"
+      dest: /tmp/hi.txt
+  - name: archive hh creation
+    archive: 
+      path:
+      - /tmp/hello.txt
+      - /tmp/hi.txt
+      dest: /tmp/hh.zip
+      format: zip
+
+  

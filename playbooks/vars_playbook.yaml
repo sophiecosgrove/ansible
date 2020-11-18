@@ -1,0 +1,8 @@
+- hosts: instance-2
+  become: yes
+  vars_files: 
+  - vars/vars.yaml
+  tasks: 
+  - name: debug
+    debug:
+      msg: "the value of webserver is {{ webserver }}"

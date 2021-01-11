@@ -1,10 +1,12 @@
-- hosts: instance-2
+# we want to deploy V1 on dev servers and V2 on prod servers
+
+- hosts: prod,dev
   become: yes
   gather_facts: no
   vars:
     webserver: nginx
     webserver_root_dir: /var/www/html
-    git_branch: ansible-course
+    # migrate git_branch variable to inventory
   tasks: 
   - name: debug
     debug:
@@ -30,4 +32,3 @@
       url: https://raw.githubusercontent.com/abdennour/example-static-website/{{ git_branch }}/index.html
       # root directory of nginx
       dest: "{{ webserver_root_dir }}" # or /usr/share/nginx/html
-

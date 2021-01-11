@@ -1,0 +1,7 @@
+- hosts: instance-2
+  tasks:
+  - name: copy string into file
+    copy:
+      content: This is a message while targeting {{ inventory_hostname }}
+      dest: /tmp/message.txt
+    delegate_to: localhost
